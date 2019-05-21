@@ -6,7 +6,7 @@
 */
 
 #ifndef _ARPSPOOF_H_
-# define _ARPSPOOF_H_
+#define _ARPSPOOF_H_
 
 #include <stdlib.h>
 
@@ -17,13 +17,17 @@
 
 typedef struct arguments_s
 {
-        char *source_ip;
-        char *dest_ip;
-        char *iface;
-        int printBroadcast;
-        int printSpoof;
-        char *mac_addr;
+    char *source_ip;
+    char *dest_ip;
+    char *iface;
+    int printBroadcast;
+    int printSpoof;
+    char *mac_addr;
 } arguments_t;
 
 static arguments_t args = {NULL, NULL, NULL, FALSE, FALSE, NULL};
+
+int parse_args(int, char **);
+void debug_args(void);
+
 #endif
