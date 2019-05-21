@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2019
-** main.c
+** parsing.c
 ** File description:
-** Gautier & Lucas ~ myARPspoof => main.c
+** Gautier & Lucas ~ myARPspoof => parsing.c
 */
 
 #include <stdio.h>

@@ -10,7 +10,8 @@ CC	=	gcc
 SRC_DIR =	src
 
 SRC	=	$(SRC_DIR)/main.c	\
-		$(SRC_DIR)/parsing.c
+		$(SRC_DIR)/parsing.c	\
+		$(SRC_DIR)/socket.c
 
 OBJ	=	$(SRC:.c=.o)
 
