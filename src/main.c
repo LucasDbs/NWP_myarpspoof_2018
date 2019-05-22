@@ -28,7 +28,6 @@
 
 int get_mac_addr()
 {
-
     return (0);
 }
 
