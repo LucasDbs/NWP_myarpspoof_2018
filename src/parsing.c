@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2019
-** main.c
+** parsing.c
 ** File description:
-** Gautier & Lucas ~ myARPspoof => main.c
+** Gautier & Lucas ~ myARPspoof => parsing.c
 */
 
 #include <stdio.h>
@@ -48,4 +48,16 @@ void debug_args(void)
     printf("Mac_addr (if PrintSpoof is TRUE): %s%s%s\n", ANSI_COLOR_CYAN, args.mac_addr, ANSI_COLOR_GREEN);
     printf("========================================\n");
     printf(ANSI_COLOR_RESET);
+}
+
+void affichebin(unsigned n)
+{
+	unsigned bit = 0 ;
+	unsigned mask = 1 ;
+	for (int i = 0 ; i < 32 ; ++i)
+	{
+		bit = (n & mask) >> i ;
+		printf("%d", bit) ;
+		mask <<= 1 ;
+	}
 }

@@ -9,6 +9,7 @@
 #define _ARPSPOOF_H_
 
 #include <stdlib.h>
+#include <arpa/inet.h>
 
 #define EXIT_ERROR 84
 #define EXIT_SUCCESS 0
@@ -29,5 +30,7 @@ static arguments_t args = {NULL, NULL, NULL, FALSE, FALSE, NULL};
 
 int parse_args(int, char **);
 void debug_args(void);
+int create_socket(struct sockaddr_in *, int);
+struct sockaddr_in create_address(int);
 
 #endif

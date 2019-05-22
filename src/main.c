@@ -7,28 +7,13 @@
 
 #include "arpspoof.h"
 
-// int create_socket(struct sockaddr_in *addr, int backlog)
-// {
-// 	int sock = socket(PF_INET, SOCK_STREAM, 0);
-
-// 	if (sock == -1) {
-// 		perror("socket failed");
-// 		return (-1);
-// 	}
-// 	if (bind(sock, (struct sockaddr *)addr, sizeof(*addr)) < 0) {
-// 		perror("bind failed");
-// 		return (-1);
-// 	}
-// 	if (listen(sock, backlog) < 0) {
-// 		perror("listen failed");
-// 		return (-1);
-// 	}
-// 	return (sock);
-// }
-
 int get_mac_addr()
 {
-    return (0);
+    struct sockaddr_in addr = create_address(42);
+	int master_sock = create_socket(&addr, 1);
+
+    // int master_sock = create_socket();
+    return (master_sock);
 }
 
 int main(int ac, char **av)
