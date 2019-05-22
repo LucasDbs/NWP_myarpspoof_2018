@@ -7,15 +7,6 @@
 
 #include "arpspoof.h"
 
-int get_mac_addr()
-{
-    struct sockaddr_in addr = create_address(42);
-	int master_sock = create_socket(&addr, 1);
-
-    // int master_sock = create_socket();
-    return (master_sock);
-}
-
 int main(int ac, char **av)
 {
     if (parse_args(ac, av) == FALSE)
