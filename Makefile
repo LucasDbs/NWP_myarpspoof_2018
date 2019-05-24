@@ -16,7 +16,9 @@ SRC	=	$(SRC_DIR)/main.c		\
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-g -Wall -Wextra -Iinclude
+CFLAGS	=	-Wall -Wextra -Iinclude
+
+CFLAGSD	=	-g -Wall -Wextra -Iinclude
 
 NAME	=	myARPspoof
 
@@ -26,6 +28,9 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 		$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS)
+
+debug:	$(OBJ)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGSD) $(LDFLAGS)
 
 clean:
 		$(RM) $(OBJ)

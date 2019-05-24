@@ -8,8 +8,23 @@
 #ifndef _ARPSPOOF_H_
 #define _ARPSPOOF_H_
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <netdb.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
 #include <arpa/inet.h>
+#include <sys/ioctl.h>
+#include <bits/ioctls.h>
+#include <net/if.h>
+#include <linux/if_ether.h>
+#include <linux/if_packet.h>
+#include <net/ethernet.h>
+#include <errno.h>
 
 #define EXIT_ERROR 84
 #define EXIT_SUCCESS 0
@@ -45,11 +60,26 @@ typedef struct _arp_hdr {
     uint8_t target_ip[4];
 } arp_hdr;
 
-static arguments_t args = {NULL, NULL, NULL, FALSE, FALSE, NULL};
+typedef struct infos_s 
+{
+    int sd;
+    char *interface;
+    char *target;
+    char *src_ip;
+    arp_hdr arphdr;
+    uint8_t *src_mac;
+    uint8_t *dst_mac;
+    uint8_t *ether_frame;
+    struct addrinfo hints;
+    struct addrinfo *res;
+    struct sockaddr_in *ipv4;
+    struct sockaddr_ll device;
+    struct ifreq ifr;
+} infos_t;
 
-int parse_args(int, char **);
-void debug_args(void);
-uint8_t get_mac_addr(void);
+int parse_args(int, char **, arguments_t *);
+void debug_args(arguments_t *);
+uint8_t get_mac_addr(arguments_t *args);
 int create_socket(struct sockaddr_in *, int);
 struct sockaddr_in create_address(int);
 

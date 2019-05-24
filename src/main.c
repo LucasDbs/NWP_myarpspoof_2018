@@ -9,9 +9,11 @@
 
 int main(int ac, char **av)
 {
-    if (parse_args(ac, av) == FALSE)
+    arguments_t args;
+
+    if (parse_args(ac, av, &args) == FALSE)
         return (EXIT_ERROR);
-    debug_args();
-    get_mac_addr();
+    debug_args(&args);
+    get_mac_addr(&args);
     return (EXIT_SUCCESS);
 }
