@@ -16,7 +16,7 @@ SRC	=	$(SRC_DIR)/main.c		\
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Iinclude
+CFLAGS	=	-Wall -Wextra -Iinclude -g
 
 CFLAGSD	=	-g -Wall -Wextra -Iinclude
 
