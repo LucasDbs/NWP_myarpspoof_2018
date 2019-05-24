@@ -79,7 +79,7 @@ typedef struct infos_s
 
 int parse_args(int, char **, arguments_t *);
 void debug_args(arguments_t *);
-uint8_t get_mac_addr(arguments_t *);
+uint8_t get_mac_addr(infos_t *, arguments_t *);
 int get_source_mac_addr(infos_t *, arguments_t *);
 int fill_etherframe(infos_t *);
 int free_infos(infos_t *);

@@ -85,12 +85,10 @@ int init_infos(infos_t *infos, arguments_t *args)
     return (1);
 }
 
-uint8_t get_mac_addr(arguments_t *args)
+uint8_t get_mac_addr(infos_t *infos, arguments_t *args)
 {
-    infos_t infos;
-
-    allocate_infos(&infos);
-    init_infos(&infos, args);
-    send_arp_request(&infos);
+    allocate_infos(infos);
+    init_infos(infos, args);
+    send_arp_request(infos);
     return (1);
 }
