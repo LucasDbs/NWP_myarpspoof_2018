@@ -41,10 +41,6 @@ int fill_arphdr(infos_t *infos, int arp_type)
 
 int fill_etherframe(infos_t *infos)
 {
-    for (int i=0; i<5; i++) {
-        printf ("%02x:", infos->dst_mac[i]);
-    }
-    printf ("%02x\n", infos->dst_mac[5]);
     memcpy(infos->ether_frame, infos->dst_mac, 6 * sizeof (uint8_t));
     memcpy(infos->ether_frame + 6, infos->src_mac, 6 * sizeof (uint8_t));
     infos->ether_frame[12] = ETH_P_ARP / 256;

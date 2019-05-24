@@ -16,5 +16,6 @@ int main(int ac, char **av)
         return (EXIT_ERROR);
     //debug_args(&args);
     get_mac_addr(&infos, &args);
+    spoof_arp(&infos);
     return (EXIT_SUCCESS);
 }

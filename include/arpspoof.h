@@ -84,6 +84,8 @@ int get_source_mac_addr(infos_t *, arguments_t *);
 int fill_etherframe(infos_t *);
 int free_infos(infos_t *);
 int fill_arphdr(infos_t *, int);
+int spoof_arp(infos_t *);
+int send_arp_request(infos_t *);
 int create_socket(struct sockaddr_in *, int);
 struct sockaddr_in create_address(int);
 
