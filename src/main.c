@@ -13,7 +13,7 @@ int main(int ac, char **av)
 
     if (parse_args(ac, av, &args) == FALSE)
         return (EXIT_ERROR);
-//    debug_args(&args);
+    //debug_args(&args);
     get_mac_addr(&args);
     return (EXIT_SUCCESS);
 }

@@ -13,6 +13,7 @@ SRC	=	$(SRC_DIR)/main.c		\
 		$(SRC_DIR)/parsing.c		\
 		$(SRC_DIR)/socket.c		\
 		$(SRC_DIR)/get_mac_addr.c	\
+		$(SRC_DIR)/get_mac_addr_2.c 	\
 
 OBJ	=	$(SRC:.c=.o)
 
