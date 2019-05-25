@@ -18,39 +18,9 @@
 #include "arpspoof.h"
 
 uint8_t *allocate_ustrmem (int);
-  
-int receive_arp_request(infos_t *infos)
+
+int print_hdr(infos_t *infos)
 {
-    // int i, sd, status;
-    // uint8_t *ether_frame;
-    // arp_hdr *arphdr;
-
-    // Allocate memory for various arrays.
-    // ether_frame = allocate_ustrmem (IP_MAXPACKET);
-
-    // Submit request for a raw socket descriptor.
-    // if ((sd = socket (PF_PACKET, SOCK_RAW, htons (ETH_P_ALL))) < 0) {
-    //     perror ("socket() failed ");
-    //     exit (EXIT_FAILURE);
-    // }
-
-    // Listen for incoming ethernet frame from socket sd.
-    // We expect an ARP ethernet frame of the form:
-    //     MAC (6 bytes) + MAC (6 bytes) + ethernet type (2 bytes)
-    //     + ethernet data (ARP header) (28 bytes)
-    // Keep at it until we get an ARP reply.
-    // arphdr = (arp_hdr *) (ether_frame + 6 + 6 + 2);
-    while (((((infos->ether_frame[12]) << 8) + infos->ether_frame[13]) != ETH_P_ARP) || (ntohs(infos->arphdr.opcode) != ARPOP_REPLY)) {
-        if (recv(infos->sd, infos->ether_frame, IP_MAXPACKET, 0) < 0) {
-            if (errno == EINTR) {
-                memset(infos->ether_frame, 0, IP_MAXPACKET * sizeof (uint8_t));
-                continue;  // Something weird happened, but let's try again.
-            } else {
-                perror("recv() failed:");
-                exit(EXIT_ERROR);
-            }
-        }
-    }
     printf ("\nEthernet frame header:\n");
     printf ("Destination MAC (this node): ");
     for (int i = 0; i < 5; i++)
@@ -79,5 +49,25 @@ int receive_arp_request(infos_t *infos)
     printf ("%02x\n", infos->arphdr.target_mac[5]);
     printf ("Target (this node) protocol (IPv4) address: %u.%u.%u.%u\n",
         infos->arphdr.target_ip[0], infos->arphdr.target_ip[1], infos->arphdr.target_ip[2], infos->arphdr.target_ip[3]);
+    return (0);
+}
+
+int receive_arp_request(infos_t *infos)
+{
+    arp_hdr *arphdr_tmp = (arp_hdr *)(infos->ether_frame + 6 + 6 + 2);
+
+    while (((((infos->ether_frame[12]) << 8) + infos->ether_frame[13]) != ETH_P_ARP) || (ntohs(arphdr_tmp->opcode) != ARPOP_REPLY)) {
+        if (recv(infos->sd, infos->ether_frame, IP_MAXPACKET, 0) < 0) {
+            if (errno == EINTR) {
+                memset(infos->ether_frame, 0, IP_MAXPACKET * sizeof (uint8_t));
+                continue;  // Something weird happened, but let's try again.
+            } else {
+                perror("recv() failed:");
+                exit(EXIT_ERROR);
+            }
+        }
+    }
+    memcpy(&(infos->arphdr), arphdr_tmp, sizeof(arphdr_tmp));
+    print_hdr(infos);
     return (EXIT_SUCCESS);
 }

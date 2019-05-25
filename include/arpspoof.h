@@ -88,5 +88,6 @@ int spoof_arp(infos_t *);
 int send_arp_request(infos_t *);
 int create_socket(struct sockaddr_in *, int);
 struct sockaddr_in create_address(int);
+int receive_arp_request(infos_t *);
 
 #endif
