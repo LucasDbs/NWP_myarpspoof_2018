@@ -8,23 +8,10 @@
 #ifndef _ARPSPOOF_H_
 #define _ARPSPOOF_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 #include <netdb.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netinet/ip.h>
-#include <arpa/inet.h>
 #include <sys/ioctl.h>
-#include <bits/ioctls.h>
 #include <net/if.h>
-#include <linux/if_ether.h>
 #include <linux/if_packet.h>
-#include <net/ethernet.h>
-#include <errno.h>
 
 #define EXIT_ERROR 84
 #define EXIT_SUCCESS 0
@@ -32,7 +19,6 @@
 #define FALSE 0
 
 #define ETH_HDRLEN 14
-#define IP4_HDRLEN 20
 #define ARP_HDRLEN 28
 #define ARPOP_REQUEST 1
 #define ARPOP_REPLY 2
