@@ -5,7 +5,7 @@
 ** Gautier & Lucas ~ myARPspoof => receive_arp.c
 */
 
-#include <stdio.h>
+// #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
@@ -67,7 +67,7 @@ int receive_arp_request(infos_t *infos)
             }
         }
     }
-    memcpy(&(infos->arphdr), arphdr_tmp, sizeof(arphdr_tmp));
+    memcpy(&(infos->arphdr), arphdr_tmp, sizeof(infos->arphdr));
     print_hdr(infos);
     return (EXIT_SUCCESS);
 }
