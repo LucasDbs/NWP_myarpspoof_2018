@@ -33,21 +33,6 @@ int parse_args(int ac, char **av, arguments_t *args)
     return (TRUE);
 }
 
-void debug_args(arguments_t *args)
-{
-    printf(ANSI_COLOR_GREEN);
-    printf("========================================\n");
-    printf("%sArguments :%s\n", ANSI_COLOR_RED, ANSI_COLOR_GREEN);
-    printf("Source_ip: %s%s%s\n", ANSI_COLOR_CYAN, args->source_ip, ANSI_COLOR_GREEN);
-    printf("Dest_ip: %s%s%s\n", ANSI_COLOR_CYAN, args->dest_ip, ANSI_COLOR_GREEN);
-    printf("Iface: %s%s%s\n", ANSI_COLOR_CYAN, args->iface, ANSI_COLOR_GREEN);
-    printf("PrintBroadcast (BOOL): %s%i%s\n", ANSI_COLOR_CYAN, args->printBroadcast, ANSI_COLOR_GREEN);
-    printf("PrintSpoof (Bool): %s%i%s\n", ANSI_COLOR_CYAN, args->printSpoof, ANSI_COLOR_GREEN);
-    printf("Mac_addr (if PrintSpoof is TRUE): %s%s%s\n", ANSI_COLOR_CYAN, args->mac_addr, ANSI_COLOR_GREEN);
-    printf("========================================\n");
-    printf(ANSI_COLOR_RESET);
-}
-
 void affichebin(unsigned n)
 {
 	unsigned bit = 0;

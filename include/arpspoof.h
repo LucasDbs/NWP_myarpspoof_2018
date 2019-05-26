@@ -64,7 +64,6 @@ typedef struct infos_s
 } infos_t;
 
 int parse_args(int, char **, arguments_t *);
-void debug_args(arguments_t *);
 uint8_t get_mac_addr(infos_t *, arguments_t *);
 int get_source_mac_addr(infos_t *, arguments_t *);
 int fill_etherframe(infos_t *);
@@ -72,8 +71,6 @@ int free_infos(infos_t *);
 int fill_arphdr(infos_t *, int);
 int spoof_arp(infos_t *);
 int send_arp_request(infos_t *);
-int create_socket(struct sockaddr_in *, int);
-struct sockaddr_in create_address(int);
 int receive_arp_request(infos_t *);
 
 #endif

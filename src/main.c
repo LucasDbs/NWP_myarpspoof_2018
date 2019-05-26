@@ -14,9 +14,9 @@ int main(int ac, char **av)
 
     if (parse_args(ac, av, &args) == FALSE)
         return (EXIT_ERROR);
-    //debug_args(&args);
     get_mac_addr(&infos, &args);
     receive_arp_request(&infos);
-    // spoof_arp(&infos);
+    spoof_arp(&infos);
+    free_infos(&infos);
     return (EXIT_SUCCESS);
 }
