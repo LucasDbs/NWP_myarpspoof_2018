@@ -32,16 +32,3 @@ int parse_args(int ac, char **av, arguments_t *args)
     }
     return (TRUE);
 }
-
-void affichebin(unsigned n)
-{
-	unsigned bit = 0;
-	unsigned mask = 1;
-
-	for (int i = 0 ; i < 32 ; ++i)
-	{
-		bit = (n & mask) >> i ;
-		printf("%d", bit) ;
-		mask <<= 1 ;
-	}
-}
