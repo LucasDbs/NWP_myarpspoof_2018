@@ -22,7 +22,7 @@ int make_request(infos_t *infos)
     if (!target_mac_tmp)
         return (0);
     memcpy(target_mac_tmp, infos->arphdr.sender_mac, 6 * sizeof(uint8_t));
-    fill_arphdr(infos, ARPOP_REQUEST);
+    fill_arphdr(infos, ARPOP_REPLY);
     fill_etherframe(infos);
     memcpy(infos->ether_frame, target_mac_tmp, 6 * sizeof(uint8_t));
     memset(infos->arphdr.sender_ip, 42, 4 * sizeof(uint8_t));
