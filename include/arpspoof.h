@@ -72,5 +72,7 @@ int fill_arphdr(infos_t *, int);
 int spoof_arp(infos_t *);
 int send_arp_request(infos_t *);
 int receive_arp_request(infos_t *);
+int printSpoof(infos_t *infos, arguments_t *);
+struct sockaddr_ll *get_my_mac_addr(arguments_t *);
 
 #endif

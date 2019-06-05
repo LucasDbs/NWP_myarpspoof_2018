@@ -40,7 +40,6 @@ int make_request(infos_t *infos)
 int spoof_arp(infos_t *infos)
 {
     make_request(infos);
-
     while (1) {
         send_arp_request(infos);
         printf("Spoofed packet sent to '%s'\n", infos->target);

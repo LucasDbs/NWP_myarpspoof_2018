@@ -76,10 +76,20 @@ int init_infos(infos_t *infos, arguments_t *args)
 
 uint8_t get_mac_addr(infos_t *infos, arguments_t *args)
 {
+    int i = 0;
+
     allocate_infos(infos);
     init_infos(infos, args);
     fill_arphdr(infos, ARPOP_REQUEST);
     fill_etherframe(infos);
+    if (args->printBroadcast) {
+        for (i = 0; i < 41; i++) {
+            printf ("%02x ", infos->ether_frame[i]);
+        }
+        printf ("%02x\n", infos->ether_frame[i]);
+        return (0);
+    } else if (args->printSpoof)
+        return (printSpoof(infos, args));
     send_arp_request(infos);
     return (1);
 }

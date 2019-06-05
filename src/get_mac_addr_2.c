@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/ioctl.h>
+#include <ifaddrs.h>
 #include <net/ethernet.h>
 #include "arpspoof.h"
 #include "color.h"
@@ -51,18 +52,15 @@ int free_infos(infos_t *infos)
 
 int get_source_mac_addr(infos_t *infos, arguments_t *args)
 {
+    struct sockaddr_ll *src_interface;
+
     strcpy(infos->interface, args->iface);
-    if ((infos->sd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) < 0) {
-        perror("[Error] socket() failed");
-        exit (EXIT_ERROR);
+    src_interface = get_my_mac_addr(args);
+    if (!src_interface) {
+        perror("get_my_mac_addr() failed");
+        return (EXIT_ERROR);     
     }
-    snprintf(infos->ifr.ifr_name, sizeof(infos->ifr.ifr_name), "%s", infos->interface);
-    if (ioctl(infos->sd, SIOCGIFHWADDR, &(infos->ifr)) < 0) {
-        perror("ioctl() failed");
-        return (EXIT_ERROR);
-    }
-    close(infos->sd);
-    memcpy(infos->src_mac, infos->ifr.ifr_hwaddr.sa_data, 6 * sizeof(uint8_t));
+    memcpy(infos->src_mac, src_interface->sll_addr, 6 * sizeof(uint8_t));
     if ((infos->device.sll_ifindex = if_nametoindex(infos->interface)) == 0) {
         perror("if_nametoindex() failed");
         exit(EXIT_ERROR);
@@ -70,4 +68,26 @@ int get_source_mac_addr(infos_t *infos, arguments_t *args)
     strcpy(infos->src_ip, args->source_ip);
     strcpy(infos->target, args->dest_ip);
     return (0);
+}
+
+struct sockaddr_ll *get_my_mac_addr(arguments_t *args)
+{
+    struct ifaddrs *ifaddr=NULL;
+    struct ifaddrs *ifa = NULL;
+    struct sockaddr_ll *s;
+
+    if (getifaddrs(&ifaddr) == -1) {
+            perror("getifaddrs");
+            exit(84);
+    } else {
+        for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
+            s = (struct sockaddr_ll*)ifa->ifa_addr;
+            if ((ifa->ifa_addr) && (ifa->ifa_addr->sa_family == AF_PACKET) &&
+                !strcmp(ifa->ifa_name, args->iface)) {
+                return (s);
+            }
+        }
+        freeifaddrs(ifaddr);
+    }
+    return 0;
 }
