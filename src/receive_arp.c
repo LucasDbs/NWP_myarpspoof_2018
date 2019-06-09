@@ -19,7 +19,7 @@ int print_found(infos_t *infos)
     for (int i = 0; i < 5; i++)
         printf ("%02x:", infos->arphdr.sender_mac[i]);
     printf ("%02x'\n", infos->arphdr.sender_mac[5]);
-    return (0); 
+    return (0);
 }
 
 int receive_request(infos_t *infos)

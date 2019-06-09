@@ -58,7 +58,7 @@ int get_source_mac_addr(infos_t *infos, arguments_t *args)
     src_interface = get_my_mac_addr(args);
     if (!src_interface) {
         perror("get_my_mac_addr() failed");
-        return (EXIT_ERROR);     
+        return (EXIT_ERROR);
     }
     memcpy(infos->src_mac, src_interface->sll_addr, 6 * sizeof(uint8_t));
     if ((infos->device.sll_ifindex = if_nametoindex(infos->interface)) == 0) {

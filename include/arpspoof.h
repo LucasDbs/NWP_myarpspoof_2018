@@ -46,7 +46,7 @@ typedef struct _arp_hdr {
     uint8_t target_ip[4];
 } arp_hdr;
 
-typedef struct infos_s 
+typedef struct infos_s
 {
     int sd;
     char *interface;
@@ -74,5 +74,6 @@ int send_arp_request(infos_t *);
 int receive_arp_request(infos_t *);
 int printSpoof(infos_t *infos, arguments_t *);
 struct sockaddr_ll *get_my_mac_addr(arguments_t *);
+int make_request(infos_t *);
 
 #endif

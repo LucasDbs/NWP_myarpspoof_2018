@@ -17,8 +17,6 @@ int parse_args(int ac, char **av, arguments_t *args)
     args->source_ip = av[1];
     args->dest_ip = av[2];
     args->iface = av[3];
-    args->printBroadcast = FALSE;
-    args->printSpoof = FALSE;
     if (ac == 5) {
         if (!strcmp(av[4], "--printBroadcast"))
             args->printBroadcast = TRUE;

@@ -29,7 +29,7 @@ int allocate_infos(infos_t *infos)
     memset(&(infos->hints), 0, sizeof(struct addrinfo));
 
     if (!infos->src_mac || !infos->dst_mac || !infos->ether_frame ||
-        !infos->interface || !infos->target || !infos->src_ip) {
+    !infos->interface || !infos->target || !infos->src_ip) {
         perror("[Error] When allocate infos");
         exit(EXIT_ERROR);
     }
@@ -67,7 +67,7 @@ int init_infos(infos_t *infos, arguments_t *args)
     }
     infos->ipv4 = (struct sockaddr_in *)infos->res->ai_addr;
     memcpy(&(infos->arphdr.target_ip), &(infos->ipv4->sin_addr),
-        4 * sizeof(uint8_t));
+    4 * sizeof(uint8_t));
     freeaddrinfo(infos->res);
     infos->device.sll_family = AF_PACKET;
     memcpy(infos->device.sll_addr, infos->src_mac, 6 * sizeof (uint8_t));
