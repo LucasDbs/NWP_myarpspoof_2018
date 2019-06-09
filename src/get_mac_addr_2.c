@@ -24,7 +24,7 @@ int fill_arphdr(infos_t *infos, int arp_type)
     infos->arphdr.plen = 4;
     infos->arphdr.opcode = htons(arp_type);
     memcpy(&(infos->arphdr.sender_mac), infos->src_mac, 6 * sizeof(uint8_t));
-    memset(&(infos->arphdr.target_mac), 0, 6 * sizeof(uint8_t));
+    memset(&(infos->arphdr.target_mac), 0xFF, 6 * sizeof(uint8_t));
     return (0);
 }
 
